@@ -82,6 +82,10 @@ public class Jogo
         System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
         System.out.println();
         
+        imprimeLocalAtual();
+    }
+
+    private void imprimeLocalAtual(){
         System.out.println("Voce esta " + ambienteAtual.getDescricao());
     
         System.out.print("Saidas: ");
@@ -177,24 +181,8 @@ public class Jogo
             System.out.println("Nao ha passagem!");
         }
         else {
-            ambienteAtual = proximoAmbiente;
-            
-            System.out.println("Voce esta " + ambienteAtual.getDescricao());
-            
-            System.out.print("Saidas: ");
-            if(ambienteAtual.saidaNorte != null) {
-                System.out.print("norte ");
-            }
-            if(ambienteAtual.saidaLeste != null) {
-                System.out.print("leste ");
-            }
-            if(ambienteAtual.saidaSul != null) {
-                System.out.print("sul ");
-            }
-            if(ambienteAtual.saidaOeste != null) {
-                System.out.print("oeste ");
-            }
-            System.out.println();
+            ambienteAtual = proximoAmbiente;            
+           imprimeLocalAtual();
         }
     }
 
