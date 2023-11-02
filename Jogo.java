@@ -85,6 +85,8 @@ public class Jogo
         imprimeLocalAtual();
     }
 
+
+    // Método que imprime o local atual em que esta o jogador
     private void imprimeLocalAtual(){
         System.out.println("Voce esta " + ambienteAtual.getDescricao());
     
