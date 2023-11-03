@@ -23,8 +23,7 @@ public class Jogo
     /**
      * Cria o jogo e incializa seu mapa interno.
      */
-    public Jogo() 
-    {
+    public Jogo() {
         criarAmbientes();
         analisador = new Analisador();
     }
@@ -34,30 +33,70 @@ public class Jogo
      */
     private void criarAmbientes()
     {
-        Ambiente fora, anfiteatro, cantina, laboratorio, escritorio;
+        Ambiente fonteTermal, tunelRochoso, tunelLago, buracoTopo, salaVazia, tunelSalaCristal, areaIgnea,
+        salaoSecreto, cavernaEscura, laboratorio, altarCristal, abismo, pedestalCrisal;
       
         // cria os ambientes
-        fora = new Ambiente("do lado de fora da entrada principal de uma universidade");
-        anfiteatro = new Ambiente("no anfiteatro");
-        cantina = new Ambiente("na cantina do campus");
-        laboratorio = new Ambiente("no laboratorio de computacao");
-        escritorio = new Ambiente("na sala de administracao dos computadores");
-        
-        // inicializa as saidas dos ambientes
-        fora.ajustarSaidas(null, anfiteatro, laboratorio, cantina);
-        anfiteatro.ajustarSaidas(null, null, null, fora);
-        cantina.ajustarSaidas(null, fora, null, null);
-        laboratorio.ajustarSaidas(fora, escritorio, null, null);
-        escritorio.ajustarSaidas(null, null, null, laboratorio);
 
-        ambienteAtual = fora;  // o jogo comeca do lado de fora
+        fonteTermal = new Ambiente(" fonte");
+        tunelRochoso = new Ambiente("rochoso");
+        tunelLago = new Ambiente("lago");
+        buracoTopo = new Ambiente("buraco");
+        salaVazia = new Ambiente("sala vazia");
+        tunelSalaCristal = new Ambiente("sala cristal");
+        areaIgnea = new Ambiente("area com lava");
+        salaoSecreto = new Ambiente("salao secreto");
+        cavernaEscura = new Ambiente("caverna escura");
+        laboratorio = new Ambiente("laboratorio");
+        altarCristal = new Ambiente("altar cristal");
+        abismo = new Ambiente("abismo");
+        pedestalCrisal = new Ambiente("pedesta de cristal");
+
+        // inicializa as saidas dos ambientes
+        //andar central
+        fonteTermal.ajustarSaidas("leste", tunelRochoso);
+        fonteTermal.ajustarSaidas("baixo", salaoSecreto);
+        
+        tunelRochoso.ajustarSaidas("norte", tunelLago);
+        tunelRochoso.ajustarSaidas("oeste", fonteTermal);
+
+        tunelLago.ajustarSaidas("norte", tunelSalaCristal);
+        tunelLago.ajustarSaidas("sul", tunelRochoso);
+        tunelLago.ajustarSaidas("leste", buracoTopo);
+        tunelLago.ajustarSaidas("baixo", laboratorio);
+
+        buracoTopo.ajustarSaidas("oeste", tunelLago);
+        buracoTopo.ajustarSaidas("baixo", abismo);
+
+        tunelSalaCristal.ajustarSaidas("sul", tunelLago);
+        tunelSalaCristal.ajustarSaidas("oeste", areaIgnea);
+        tunelSalaCristal.ajustarSaidas("leste", salaVazia);
+
+        salaVazia.ajustarSaidas("oeste", tunelSalaCristal);
+
+        areaIgnea.ajustarSaidas("leste", tunelSalaCristal);
+        areaIgnea.ajustarSaidas("baixo", altarCristal);
+
+        //andar inferior
+        altarCristal.ajustarSaidas("cima", areaIgnea);
+
+        abismo.ajustarSaidas("cima", buracoTopo);
+        abismo.ajustarSaidas("norte", pedestalCrisal);
+
+        salaoSecreto.ajustarSaidas("cima", fonteTermal);
+        salaoSecreto.ajustarSaidas("leste", cavernaEscura);
+
+        cavernaEscura.ajustarSaidas("oeste", salaoSecreto);
+
+        pedestalCrisal.ajustarSaidas("sul", abismo);
+
+        ambienteAtual = tunelRochoso;  // o jogo comeca na area rochosa
     }
 
     /**
      *  Rotina principal do jogo. Fica em loop ate terminar o jogo.
      */
-    public void jogar() 
-    {            
+    public void jogar() {            
         imprimirBoasVindas();
 
         // Entra no loop de comando principal. Aqui nos repetidamente lemos
@@ -204,4 +243,3 @@ public class Jogo
         }
     }
 }
-//random ds
