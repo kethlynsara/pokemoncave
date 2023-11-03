@@ -1,22 +1,4 @@
-/**
- *  Essa eh a classe principal da aplicacao "World of Zull".
- *  "World of Zuul" eh um jogo de aventura muito simples, baseado em texto.
- *  Usuarios podem caminhar em um cenario. E eh tudo! Ele realmente
- *  precisa ser estendido para fazer algo interessante!
- * 
- *  Para jogar esse jogo, crie uma instancia dessa classe e chame o metodo
- *  "jogar".
- * 
- *  Essa classe principal cria e inicializa todas as outras: ela cria os
- *  ambientes, cria o analisador e comeca o jogo. Ela tambeme avalia e 
- *  executa os comandos que o analisador retorna.
- * 
- * @author  Michael Kölling and David J. Barnes (traduzido por Julio Cesar Alves)
- * @version 2011.07.31 (2016.02.01)
- */
-
-public class Jogo 
-{
+public class Jogo {
     private Analisador analisador;
     private Ambiente ambienteAtual;
         
@@ -31,8 +13,7 @@ public class Jogo
     /**
      * Cria todos os ambientes e liga as saidas deles
      */
-    private void criarAmbientes()
-    {
+    private void criarAmbientes() {
         Ambiente fonteTermal, tunelRochoso, tunelLago, buracoTopo, salaVazia, tunelSalaCristal, areaIgnea,
         salaoSecreto, cavernaEscura, laboratorio, altarCristal, abismo, pedestalCrisal;
       
@@ -127,20 +108,12 @@ public class Jogo
 
     // Método que imprime o local atual em que esta o jogador
     private void imprimeLocalAtual(){
-        System.out.println("Voce esta " + ambienteAtual.getDescricao());
+        System.out.println("Voce esta em um(a) " + ambienteAtual.getDescricao());
     
-        System.out.print("Saidas: ");
-        if(ambienteAtual.saidaNorte != null) {
-            System.out.print("norte ");
-        }
-        if(ambienteAtual.saidaLeste != null) {
-            System.out.print("leste ");
-        }
-        if(ambienteAtual.saidaSul != null) {
-            System.out.print("sul ");
-        }
-        if(ambienteAtual.saidaOeste != null) {
-            System.out.print("oeste ");
+        System.out.println("Saidas disponiveis:");
+        
+        for (String s: ambienteAtual.listaSaidas()) {
+            System.out.print(s + "  ");
         }
         System.out.println();
     }
@@ -150,8 +123,7 @@ public class Jogo
      * @param comando O Comando a ser processado.
      * @return true se o comando finaliza o jogo.
      */
-    private boolean processarComando(Comando comando) 
-    {
+    private boolean processarComando(Comando comando){
         boolean querSair = false;
 
         if(comando.ehDesconhecido()) {
@@ -186,15 +158,18 @@ public class Jogo
         System.out.println("pela universidade.");
         System.out.println();
         System.out.println("Suas palavras de comando sao:");
-        System.out.println("   ir sair ajuda");
+        System.out.print("==  ");
+        for (String e : analisador.comandos()) {
+            System.out.print(e + "  ");
+        }
+        System.out.println("==");
     }
 
     /** 
      * Tenta ir em uma direcao. Se existe uma saida entra no 
      * novo ambiente, caso contrario imprime mensagem de erro.
      */
-    private void irParaAmbiente(Comando comando) 
-    {
+    private void irParaAmbiente(Comando comando) {
         if(!comando.temSegundaPalavra()) {
             // se nao ha segunda palavra, nao sabemos pra onde ir...
             System.out.println("Ir pra onde?");
@@ -205,23 +180,14 @@ public class Jogo
 
         // Tenta sair do ambiente atual
         Ambiente proximoAmbiente = null;
-        if(direcao.equals("norte")) {
-            proximoAmbiente = ambienteAtual.saidaNorte;
-        }
-        if(direcao.equals("leste")) {
-            proximoAmbiente = ambienteAtual.saidaLeste;
-        }
-        if(direcao.equals("sul")) {
-            proximoAmbiente = ambienteAtual.saidaSul;
-        }
-        if(direcao.equals("oeste")) {
-            proximoAmbiente = ambienteAtual.saidaOeste;
+        
+        if (ambienteAtual.listaSaidas().contains(direcao)) {
+            proximoAmbiente = ambienteAtual.getSaida(direcao);
         }
 
         if (proximoAmbiente == null) {
             System.out.println("Nao ha passagem!");
-        }
-        else {
+        } else {
             ambienteAtual = proximoAmbiente;            
            imprimeLocalAtual();
         }

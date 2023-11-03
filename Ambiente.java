@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.*;
 
 public class Ambiente {
 
@@ -12,6 +12,17 @@ public class Ambiente {
 
     public void ajustarSaidas(String direcao, Ambiente ambiente) {
         saidas.put(direcao, ambiente);
+    }
+
+    public Ambiente getSaida(String direcao) {
+        return saidas.get(direcao);
+    }
+
+    //pega as chaves do hashmap e retorna em uma lista
+     public List<String> listaSaidas() {
+        Set<String> saidasDisponiveis = saidas.keySet();
+        List<String> listaChaves = new ArrayList<>(saidasDisponiveis);
+        return Collections.unmodifiableList(listaChaves);
     }
 
     public String getDescricao(){

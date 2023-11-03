@@ -17,8 +17,7 @@
  * @version 2011.07.31 (2016.02.01)
  */
 
-public class Comando
-{
+public class Comando {
     private String palavraDeComando;
     private String segundaPalavra;
 
