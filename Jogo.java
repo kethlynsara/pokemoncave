@@ -6,14 +6,14 @@ public class Jogo {
     Cria o jogo, definindo seu mapa e cenários.
     */
     public Jogo() {
-        criarAmbientes();
+        criarMapa();
         analisador = new Analisador();
     }
 
     /*
     Cria todos os ambientes e liga as saidas deles
     */    
-    private void criarAmbientes() {
+    private void criarMapa() {
 
         Ambiente fonteTermal, tunelRochoso, tunelLago, buracoTopo, salaVazia, tunelSalaCristal, areaIgnea,
         salaoSecreto, cavernaEscura, laboratorio, altarCristal, abismo, pedestalCrisal;
