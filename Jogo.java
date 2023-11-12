@@ -126,12 +126,13 @@ public class Jogo {
     private boolean processarComando(Comando comando){
         boolean querSair = false;
 
-        if(comando.ehDesconhecido()) {
+        String palavraDeComando = comando.getPalavraDeComando();
+
+        if(comando.ehDesconhecido(palavraDeComando)) {
             System.out.println("Eu nao entendi o que voce disse...");
             return false;
         }
 
-        String palavraDeComando = comando.getPalavraDeComando();
         if (palavraDeComando.equals("ajuda")) {
             imprimirAjuda();
         }
