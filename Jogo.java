@@ -2,22 +2,23 @@ public class Jogo {
     private Analisador analisador;
     private Ambiente ambienteAtual;
         
-    /**
-     * Cria o jogo e incializa seu mapa interno.
-     */
+    /*
+    Cria o jogo, definindo seu mapa e cenários.
+    */
     public Jogo() {
         criarAmbientes();
         analisador = new Analisador();
     }
 
-    /**
-     * Cria todos os ambientes e liga as saidas deles
-     */
+    /*
+    Cria todos os ambientes e liga as saidas deles
+    */    
     private void criarAmbientes() {
+
         Ambiente fonteTermal, tunelRochoso, tunelLago, buracoTopo, salaVazia, tunelSalaCristal, areaIgnea,
         salaoSecreto, cavernaEscura, laboratorio, altarCristal, abismo, pedestalCrisal;
       
-        // cria os ambientes
+        // Cria os ambiente, inserindo a descrição
 
         fonteTermal = new Ambiente(" fonte");
         tunelRochoso = new Ambiente("rochoso");
@@ -71,12 +72,12 @@ public class Jogo {
 
         pedestalCrisal.ajustarSaidas("sul", abismo);
 
-        ambienteAtual = tunelRochoso;  // o jogo comeca na area rochosa
+        ambienteAtual = tunelRochoso;  // O ambiente onde o jogo comeca é na area rochosa
     }
 
-    /**
-     *  Rotina principal do jogo. Fica em loop ate terminar o jogo.
-     */
+    /*
+    Onde o jogo é excecutado. Fica em loop ate terminar o jogo.
+    */
     public void jogar() {            
         imprimirBoasVindas();
 
@@ -94,19 +95,18 @@ public class Jogo {
     /**
      * Imprime a mensagem de abertura para o jogador.
      */
-    private void imprimirBoasVindas()
-    {
+    private void imprimirBoasVindas(){
         System.out.println();
-        System.out.println("Bem-vindo ao World of Zuul!");
-        System.out.println("World of Zuul eh um novo jogo de aventura, incrivelmente chato.");
-        System.out.println("Digite 'ajuda' se voce precisar de ajuda.");
+        System.out.println("Bem-vindo ao PokemonCave Game!");
+        System.out.println("PokemonCave Game eh um jogo de explorassao, incrivelmente intrigante.");
+        System.out.println("Digite 'ajuda' caso precise de algumas dicas.");
         System.out.println();
         
         imprimeLocalAtual();
     }
 
 
-    // Método que imprime o local atual em que esta o jogador
+    // Metodo usado para informar a localizacao atual do jogador
     private void imprimeLocalAtual(){
         System.out.println("Voce esta em um(a) " + ambienteAtual.getDescricao());
     
@@ -147,17 +147,15 @@ public class Jogo {
 
     // Implementacoes dos comandos do usuario
 
-    /**
-     * Printe informacoes de ajuda.
-     * Aqui nos imprimimos algo bobo e enigmatico e a lista de 
-     * palavras de comando
-     */
-    private void imprimirAjuda() 
-    {
-        System.out.println("Voce esta perdido. Voce esta sozinho. Voce caminha");
-        System.out.println("pela universidade.");
+    /*
+    Exibimos uma mensagem contextualizada com o jogo
+    E listamos as possíveis decisões do jogador
+    */
+    private void imprimirAjuda(){
+        System.out.println("Voce esta perdido e sozinho. Então voce caminha");
+        System.out.println("pela enorme caverna estranha.");
         System.out.println();
-        System.out.println("Suas palavras de comando sao:");
+        System.out.println("Suas ações disponíveis são:");
         System.out.print("==  ");
         for (String e : analisador.comandos()) {
             System.out.print(e + "  ");
@@ -165,10 +163,10 @@ public class Jogo {
         System.out.println("==");
     }
 
-    /** 
-     * Tenta ir em uma direcao. Se existe uma saida entra no 
-     * novo ambiente, caso contrario imprime mensagem de erro.
-     */
+    /*
+    Tenta ir em uma direcao. Se existe uma saida entra no 
+    novo ambiente, caso contrario imprime mensagem de erro.
+    */
     private void irParaAmbiente(Comando comando) {
         if(!comando.temSegundaPalavra()) {
             // se nao ha segunda palavra, nao sabemos pra onde ir...
