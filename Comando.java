@@ -19,8 +19,7 @@ public class Comando {
      * Se o comando nao foi entendido, o resultado eh null.
      * @return A palavra de comando.
      */
-    public String getPalavraDeComando()
-    {
+    public String getPalavraDeComando(){
         return palavraDeComando;
     }
 
@@ -36,10 +35,9 @@ public class Comando {
     /**
      * @return true se o comando nao foi entendido.
     */
-    public boolean ehDesconhecido(String comando){
+    public boolean ehDesconhecido(){
         return (palavraDeComando == null);
     }
-    
 
     /**
      * @return true se o comando tem uma segunda palavra.

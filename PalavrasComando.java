@@ -22,11 +22,7 @@ public class PalavrasComando {
     }
 
     public boolean ehComando(String umaString){
-        for(int i = 0; i < comandosValidos.size(); i++) {            
-            if(comandosValidos.get(i).equals(umaString))
-                return true;
-        }
-        // se chegamos aqui, a string nao foi encontrada nos comandos.
-        return false;
+        // Verifica se contem o comando.
+        return comandosValidos.contains(umaString);
     }
 }
