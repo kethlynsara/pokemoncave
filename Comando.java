@@ -56,8 +56,7 @@ public class Comando {
     /**
      * @return true se o comando nao foi entendido.
      */
-    public boolean ehDesconhecido()
-    {
+    public boolean ehDesconhecido(){
         return (palavraDeComando == null);
     }
 

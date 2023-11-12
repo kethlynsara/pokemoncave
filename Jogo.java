@@ -147,7 +147,7 @@ public class Jogo {
 
     // Implementacoes dos comandos do usuario
 
-    /*
+    /**
     Exibimos uma mensagem contextualizada com o jogo
     E listamos as possíveis decisões do jogador
     */
@@ -163,7 +163,7 @@ public class Jogo {
         System.out.println("==");
     }
 
-    /*
+    /**
     Tenta ir em uma direcao. Se existe uma saida entra no 
     novo ambiente, caso contrario imprime mensagem de erro.
     */
@@ -191,11 +191,11 @@ public class Jogo {
         }
     }
 
-    /** 
-     * "Sair" foi digitado. Verifica o resto do comando pra ver
-     * se nos queremos realmente sair do jogo.
-     * @return true, se este comando sai do jogo, false, caso contrario
-     */
+    /**
+    "Sair" foi digitado. Verifica o resto do comando pra ver
+    se nos queremos realmente sair do jogo.
+    @return true, se este comando sai do jogo, false, caso contrario
+    */
     private boolean sair(Comando comando) 
     {
         if(comando.temSegundaPalavra()) {
