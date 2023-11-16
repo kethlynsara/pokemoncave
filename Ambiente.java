@@ -3,9 +3,11 @@ import java.util.*;
 public class Ambiente {
 
     private String descricao;
+    private String nome;
     private HashMap<String,Ambiente> saidas;
 
-    public Ambiente(String descricao) {
+    public Ambiente(String nome, String descricao) {
+        this.nome = descricao;
         this.descricao = descricao;
         saidas = new HashMap<String,Ambiente>();
     }
@@ -27,5 +29,9 @@ public class Ambiente {
 
     public String getDescricao(){
         return descricao;
+    }
+
+    public String getNome() {
+        return nome;
     }
 }

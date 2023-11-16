@@ -2,37 +2,33 @@ public class Jogo {
     private Analisador analisador;
     private Ambiente ambienteAtual;
         
-    /*
-    Cria o jogo, definindo seu mapa e cenários.
-    */
+    // Cria o jogo, definindo seu mapa e cenários.
     public Jogo() {
         criarMapa();
         analisador = new Analisador();
     }
 
-    /*
-    Cria todos os ambientes e liga as saidas deles
-    */    
+    // Cria todos os ambientes e liga as saidas deles
     private void criarMapa() {
 
         Ambiente fonteTermal, tunelRochoso, tunelLago, buracoTopo, salaVazia, tunelSalaCristal, areaIgnea,
         salaoSecreto, cavernaEscura, laboratorio, altarCristal, abismo, pedestalCrisal;
       
-        // Cria os ambiente, inserindo a descrição
+        // Cria os ambiente, inserindo a descrição e o nome dos ambientes
 
-        fonteTermal = new Ambiente(" fonte");
-        tunelRochoso = new Ambiente("rochoso");
-        tunelLago = new Ambiente("lago");
-        buracoTopo = new Ambiente("buraco");
-        salaVazia = new Ambiente("sala vazia");
-        tunelSalaCristal = new Ambiente("sala cristal");
-        areaIgnea = new Ambiente("area com lava");
-        salaoSecreto = new Ambiente("salao secreto");
-        cavernaEscura = new Ambiente("caverna escura");
-        laboratorio = new Ambiente("laboratorio");
-        altarCristal = new Ambiente("altar cristal");
-        abismo = new Ambiente("abismo");
-        pedestalCrisal = new Ambiente("pedesta de cristal");
+        fonteTermal = new Ambiente("Fonte Termal", " descrissao ");
+        tunelRochoso = new Ambiente("Túnel Rochoso", " descrissao ");
+        tunelLago = new Ambiente("Lago Subterrâneo", " descrissao ");
+        buracoTopo = new Ambiente("Buraco", " descrissao ");
+        salaVazia = new Ambiente("Sala Vazia", " descrissao ");
+        tunelSalaCristal = new Ambiente("Sala de Cristal", " descrissao ");
+        areaIgnea = new Ambiente("Região com Magma", " descrissao ");
+        salaoSecreto = new Ambiente("Salao Secreto", " descrissao ");
+        cavernaEscura = new Ambiente("Caverna Escura", " descrissao ");
+        laboratorio = new Ambiente("Laboratorio", " descrissao ");
+        altarCristal = new Ambiente("Altar de Cristal", " descrissao ");
+        abismo = new Ambiente("Fundo do Abismo", " descrissao ");
+        pedestalCrisal = new Ambiente("Pedestal de Cristal", " descrissao ");
 
         // inicializa as saidas dos ambientes
         //andar central
@@ -75,9 +71,7 @@ public class Jogo {
         ambienteAtual = tunelRochoso;  // O ambiente onde o jogo comeca é na area rochosa
     }
 
-    /*
-    Onde o jogo é excecutado. Fica em loop ate terminar o jogo.
-    */
+    // Onde o jogo é excecutado. Fica em loop ate terminar o jogo.
     public void jogar() {            
         imprimirBoasVindas();
 
@@ -92,9 +86,7 @@ public class Jogo {
         System.out.println("Obrigado por jogar. Ate mais!");
     }
 
-    /**
-     * Imprime a mensagem de abertura para o jogador.
-     */
+    // Imprime a mensagem de abertura para o jogador.
     private void imprimirBoasVindas(){
         System.out.println();
         System.out.println("Bem-vindo ao PokemonCave Game!");
@@ -105,10 +97,9 @@ public class Jogo {
         imprimeLocalAtual();
     }
 
-
     // Metodo usado para informar a localizacao atual do jogador
     private void imprimeLocalAtual(){
-        System.out.println("Voce esta em um(a) " + ambienteAtual.getDescricao());
+        System.out.println("Voce esta no(a) " + ambienteAtual.getNome());
     
         System.out.println("Saidas disponiveis:");
         
