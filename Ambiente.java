@@ -11,7 +11,7 @@ public class Ambiente {
     private HashMap<String,Ambiente> saidas;
 
     public Ambiente(String nome, String descricao) {
-        this.nome = descricao;
+        this.nome = nome;
         this.descricao = descricao;
         saidas = new HashMap<String,Ambiente>();
     }
