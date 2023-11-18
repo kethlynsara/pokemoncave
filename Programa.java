@@ -1,4 +1,3 @@
-
 public class Programa {
 
 	public static void main(String[] args) {
@@ -6,5 +5,4 @@ public class Programa {
 		
 		jogo.jogar();
 	}
-
 }

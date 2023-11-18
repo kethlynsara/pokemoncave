@@ -30,7 +30,7 @@ public class Jogo {
         abismo = new Ambiente("Fundo do Abismo", " descrissao ");
         pedestalCrisal = new Ambiente("Pedestal de Cristal", " descrissao ");
 
-        // inicializa as saidas dos ambientes
+        // Define as rotas de saida
         //andar central
         fonteTermal.ajustarSaidas("leste", tunelRochoso);
         fonteTermal.ajustarSaidas("baixo", salaoSecreto);
@@ -109,14 +109,11 @@ public class Jogo {
         System.out.println();
     }
 
-    /**
-     * Dado um comando, processa-o (ou seja, executa-o)
-     * @param comando O Comando a ser processado.
-     * @return true se o comando finaliza o jogo.
-     */
+    // Dado um comando, processa-o (ou seja, executa-o)
+    // @param comando O Comando a ser processado.
+    // @return true se o comando finaliza o jogo.     
     private boolean processarComando(Comando comando){
         boolean querSair = false;
-
 
         if(comando.ehDesconhecido()) {
             System.out.println("Eu nao entendi o que voce disse...");
@@ -189,8 +186,7 @@ public class Jogo {
     se nos queremos realmente sair do jogo.
     @return true, se este comando sai do jogo, false, caso contrario
     */
-    private boolean sair(Comando comando) 
-    {
+    private boolean sair(Comando comando) {
         if(comando.temSegundaPalavra()) {
             System.out.println("Sair o que?");
             return false;
