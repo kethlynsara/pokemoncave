@@ -8,12 +8,18 @@ public class Ambiente {
 
     private String descricao;
     private String nome;
+    private Inimigo pokemonSelvagem;
     private HashMap<String,Ambiente> saidas;
 
     public Ambiente(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
         saidas = new HashMap<String,Ambiente>();
+    }
+
+    public Ambiente(String nome, String descricao, Inimigo inimigo) {
+        this(nome,descricao);
+        this.pokemonSelvagem = inimigo;
     }
 
     public void ajustarSaidas(String direcao, Ambiente ambiente) {
@@ -31,11 +37,27 @@ public class Ambiente {
         return Collections.unmodifiableList(listaChaves);
     }
 
-    public String getDescricao(){
+    public boolean temInimigo() {
+        return pokemonSelvagem != null;
+    }
+
+    private String getDescricao(){
         return descricao;
+    }
+
+    public String descricaoCompleta() {
+        if (temInimigo()) {
+            return getDescricao() + "\n Oh nao, voce encontrou um " + pokemonSelvagem.getNome() + " Selvagem";
+        } else {
+            return getDescricao();
+        }
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public Inimigo adversario() {
+        return pokemonSelvagem;
     }
 }
