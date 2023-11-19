@@ -1,11 +1,17 @@
 public class Jogo {
     private Analisador analisador;
     private Ambiente ambienteAtual;
+    private boolean terminado;
+    private Jogador jogador;
+    private Combate combate;
         
     // Cria o jogo, definindo seu mapa e cenários.
     public Jogo() {
         criarMapa();
         analisador = new Analisador();
+        terminado = false;
+        jogador = new Jogador(100,2,20);
+        combate = new Combate();
     }
 
     // Cria todos os ambientes e liga as saidas deles
@@ -16,7 +22,7 @@ public class Jogo {
       
         // Cria os ambiente, inserindo a descrição e o nome dos ambientes
 
-        fonteTermal = new Ambiente("Fonte Termal", " descrissao ");
+        fonteTermal = new Ambiente("Fonte Termal", " descrissao ", new Inimigo("Geodude", 100, 3, 10, new ItemCura("oran berry")));
         tunelRochoso = new Ambiente("Túnel Rochoso", " descrissao ");
         tunelLago = new Ambiente("Lago Subterrâneo", " descrissao ");
         buracoTopo = new Ambiente("Buraco", " descrissao ");
@@ -76,9 +82,7 @@ public class Jogo {
         imprimirBoasVindas();
 
         // Entra no loop de comando principal. Aqui nos repetidamente lemos
-        // comandos e os executamos ate o jogo terminar.
-                
-        boolean terminado = false;
+        // comandos e os executamos ate o jogo terminar.                
         while (! terminado) {
             Comando comando = analisador.pegarComando();
             terminado = processarComando(comando);
@@ -127,6 +131,9 @@ public class Jogo {
         }
         else if (palavraDeComando.equals("ir")) {
             irParaAmbiente(comando);
+        }
+        else if (palavraDeComando.equals("observar")) {
+            observarAmbiente();
         }
         else if (palavraDeComando.equals("sair")) {
             querSair = sair(comando);
@@ -178,6 +185,33 @@ public class Jogo {
         } else {
             ambienteAtual = proximoAmbiente;            
            imprimeLocalAtual();
+        }
+    }
+
+    private void observarAmbiente(){ // Como coletar decisao, muda Palavras de comando???
+        System.out.println(ambienteAtual.descricaoCompleta());        
+
+        if (ambienteAtual.temInimigo()) {
+        //    System.out.println("Voce deseja lutar com ele?");
+        //    System.out.println("1) SIM     2) NAO");
+        //    Comando decisao = analisador.pegarComando();
+        //    if (decisao.getPalavraDeComando().equals("1")) {
+                lutar();
+        //    } else if (decisao.getPalavraDeComando().equals("2")) {
+        //       return; 
+        //    }
+        } else {
+            return;
+        }
+    }
+
+    private void lutar() {
+        if (!combate.luta(jogador, ambienteAtual.adversario())) {
+            terminado = false;
+            System.out.println("Voce esta morto, tente novamente !!!");
+        } else {
+            System.out.println("Voce esta coletou o item que estava com " + ambienteAtual.adversario().getNome());
+            ambienteAtual.adversario().soltarItem().coletar(jogador);
         }
     }
 
