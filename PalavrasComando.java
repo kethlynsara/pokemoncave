@@ -14,7 +14,6 @@ public class PalavrasComando {
         comandosValidos.add("sair");
         comandosValidos.add("ajuda");
         comandosValidos.add("observar");
-        comandosValidos.add("acao");
     }
 
     public List<String> listaDeComandos() {
