@@ -1,4 +1,4 @@
-public class ItemAtaque extends Item implements Coletavel {
+public class ItemAtaque extends Item {
 
     public ItemAtaque(String nome) {
         super(nome);
@@ -6,8 +6,8 @@ public class ItemAtaque extends Item implements Coletavel {
 
     public void coletar(Jogador jogador) {
         jogador.setAtaque(3);
-        System.out.println("===== +++ =====");
-        System.out.println("É uma Berry " + nome + " Voce ganhou 3 pontos de ataque !!!");
+        super.coletar(jogador);
+        System.out.println(" Voce ganhou 3 pontos de ataque !!!");
         System.out.println("Voce tem " + jogador.getAtaque() + " Pontos de ataque atualmente");
         System.out.println("===== +++ =====");
     }

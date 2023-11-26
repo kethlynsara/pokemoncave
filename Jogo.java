@@ -210,9 +210,9 @@ public class Jogo {
             terminado = false;
             System.out.println("Voce esta morto, tente novamente !!!");
         } else {
-            System.out.println("Voce esta coletou o item que estava com " + ambienteAtual.adversario().getNome());
             ambienteAtual.adversario().soltarItem().coletar(jogador);
-        }
+            System.out.println("Voce esta coletou o item que estava com " + ambienteAtual.adversario().getNome());
+        } 
     }
 
     /**

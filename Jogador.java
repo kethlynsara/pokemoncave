@@ -4,14 +4,14 @@ public class Jogador extends Pokemon {
     }
 
     public void setPontosDeVida(int pontosDeVida) {
-       setPontosDeVida(pontosDeVida);
+       super.setPontosDeVida(pontosDeVida);
     }
 
     public void setArmadura(int armadura) {
-        setArmadura(armadura);
+        super.setArmadura(armadura);
     }
 
     public void setAtaque(int ataque) {
-        setAtaque(ataque);
+        super.setAtaque(ataque);
     }
 }
