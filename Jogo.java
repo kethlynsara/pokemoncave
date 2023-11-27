@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Jogo {
     private Analisador analisador;
     private Ambiente ambienteAtual;
@@ -19,22 +22,24 @@ public class Jogo {
 
         Ambiente fonteTermal, tunelRochoso, tunelLago, buracoTopo, salaVazia, tunelSalaCristal, areaIgnea,
         salaoSecreto, cavernaEscura, laboratorio, altarCristal, abismo, pedestalCrisal;
+
+        ArrayList<Inimigo> inimigos = getInimigosDoJogo();      
       
         // Cria os ambiente, inserindo a descrição e o nome dos ambientes
 
-        fonteTermal = new Ambiente("Fonte Termal", " descrissao ", new Inimigo("Geodude", 100, 3, 10, new ItemCura("oran berry")));
-        tunelRochoso = new Ambiente("Túnel Rochoso", " descrissao ");
-        tunelLago = new Ambiente("Lago Subterrâneo", " descrissao ");
-        buracoTopo = new Ambiente("Buraco", " descrissao ");
-        salaVazia = new Ambiente("Sala Vazia", " descrissao ");
-        tunelSalaCristal = new Ambiente("Sala de Cristal", " descrissao ");
-        areaIgnea = new Ambiente("Região com Magma", " descrissao ");
-        salaoSecreto = new Ambiente("Salao Secreto", " descrissao ");
-        cavernaEscura = new Ambiente("Caverna Escura", " descrissao ");
-        laboratorio = new Ambiente("Laboratorio", " descrissao ");
-        altarCristal = new Ambiente("Altar de Cristal", " descrissao ");
-        abismo = new Ambiente("Fundo do Abismo", " descrissao ");
-        pedestalCrisal = new Ambiente("Pedestal de Cristal", " descrissao ");
+        fonteTermal = new Ambiente("Fonte Termal", " descricao ", new Inimigo("Geodude", 100, 3, 10, new ItemCura("oran berry")));
+        tunelRochoso = new Ambiente("Túnel Rochoso", " descricao ");
+        tunelLago = new Ambiente("Lago Subterrâneo", " descricao ");
+        buracoTopo = new Ambiente("Buraco", " descricao ", inimigos.get(2));
+        salaVazia = new Ambiente("Sala Vazia", " descricao ");
+        tunelSalaCristal = new Ambiente("Sala de Cristal", " descricao ");
+        areaIgnea = new Ambiente("Região com Magma", " descricao ");
+        salaoSecreto = new Ambiente("Salao Secreto", " descricao ");
+        cavernaEscura = new Ambiente("Caverna Escura", " descricao ", inimigos.get(0));
+        laboratorio = new Ambiente("Laboratorio", " descricao ");
+        altarCristal = new Ambiente("Altar de Cristal", " descricao ");
+        abismo = new Ambiente("Fundo do Abismo", " descricao ");
+        pedestalCrisal = new Ambiente("Pedestal de Cristal", " descricao ", inimigos.get(1));
 
         // Define as rotas de saida
         //andar central
@@ -75,6 +80,19 @@ public class Jogo {
         pedestalCrisal.ajustarSaidas("sul", abismo);
 
         ambienteAtual = tunelRochoso;  // O ambiente onde o jogo comeca é na area rochosa
+    }
+
+    // Devolve a lista de inimigos de forma aleatória
+    private ArrayList<Inimigo> getInimigosDoJogo() {
+        ArrayList<Inimigo> inimigos = new ArrayList<>();
+        
+        inimigos.add(new Inimigo("Geodude", 100, 3, 10, new ItemCura("Oran berry")));
+        inimigos.add(new Inimigo("Rufflet", 100, 4, 15, new ItemDefesa("Apicot berry")));
+        inimigos.add(new Inimigo("Cramorant", 100, 5, 10, new ItemAtaque("Liechi berry")));
+        
+        Collections.shuffle(inimigos);
+
+        return inimigos;
     }
 
     // Onde o jogo é excecutado. Fica em loop ate terminar o jogo.
