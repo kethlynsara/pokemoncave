@@ -1,7 +1,7 @@
 public class ItemCura extends Item {
 
-    public ItemCura(String nome) {
-        super(nome);
+    public ItemCura() {
+        super("Oran berry");
     }
 
     public void coletar(Jogador jogador) {

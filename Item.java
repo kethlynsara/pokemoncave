@@ -10,6 +10,6 @@ public class Item implements Coletavel {
     }
 
     public void coletar (Jogador jogador) {
-        System.out.println("===== É uma " + nome + " Berry =====");
+        System.out.println("===== É uma " + nome + " =====");
     }
 }

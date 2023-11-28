@@ -13,41 +13,41 @@ public class Jogo {
         criarMapa();
         analisador = new Analisador();
         terminado = false;
-        jogador = new Jogador(100,2,20);
+        jogador = new Jogador(100,5,20);
         combate = new Combate();
     }
 
     // Cria todos os ambientes e liga as saidas deles
     private void criarMapa() {
 
-        Ambiente fonteTermal, tunelRochoso, tunelLago, buracoTopo, salaVazia, tunelSalaCristal, areaIgnea,
+        Ambiente grutaSubterranea, tunelRochoso, tunelLago, buracoTopo, salaVazia, tunelSalaCristal, areaIgnea,
         salaoSecreto, cavernaEscura, laboratorio, altarCristal, abismo, pedestalCrisal;
 
         ArrayList<Inimigo> inimigos = getInimigosDoJogo();      
       
         // Cria os ambiente, inserindo a descrição e o nome dos ambientes
 
-        fonteTermal = new Ambiente("Fonte Termal", " descricao ", new Inimigo("Geodude", 100, 3, 10, new ItemCura("oran berry")));
-        tunelRochoso = new Ambiente("Túnel Rochoso", " descricao ");
-        tunelLago = new Ambiente("Lago Subterrâneo", " descricao ");
-        buracoTopo = new Ambiente("Buraco", " descricao ", inimigos.get(2));
-        salaVazia = new Ambiente("Sala Vazia", " descricao ");
-        tunelSalaCristal = new Ambiente("Sala de Cristal", " descricao ");
-        areaIgnea = new Ambiente("Região com Magma", " descricao ");
-        salaoSecreto = new Ambiente("Salao Secreto", " descricao ");
-        cavernaEscura = new Ambiente("Caverna Escura", " descricao ", inimigos.get(0));
-        laboratorio = new Ambiente("Laboratorio", " descricao ");
-        altarCristal = new Ambiente("Altar de Cristal", " descricao ");
-        abismo = new Ambiente("Fundo do Abismo", " descricao ");
-        pedestalCrisal = new Ambiente("Pedestal de Cristal", " descricao ", inimigos.get(1));
+        grutaSubterranea = new Ambiente("Gruta D'Água", "É Longo corrego com uma agua cristalina, cercada por rochas e algumas estalactites", inimigos.get(0));
+        tunelRochoso = new Ambiente("Túnel Rochoso", "É um túnel amplo com pouca iluminacao e uma pequena trilha no centro");
+        tunelLago = new Ambiente("Lago Subterrâneo", "É um grande lago com água fresca e limpa, cercado de minerios nas paredes rochosas", inimigos.get(1));
+        buracoTopo = new Ambiente("Buraco", "É um enorme e profundo abismo, cercado de estactites e estalagmites", inimigos.get(2));
+        salaVazia = new Ambiente("Sala Vazia", "É uma sala com pouca mobilia, bem iluminada e espacosa", inimigos.get(3));
+        tunelSalaCristal = new Ambiente("Sala de Cristal", "É um salao com paredes feitas de cristais que reluzem em uma cor vibrante");
+        areaIgnea = new Ambiente("Região quente", "É uma caverna com magma correndo ao fundo, bem escura");
+        salaoSecreto = new Ambiente("Salao Secreto", "É uma Sala escondida entre as rochas com algumas estantes e livros");
+        cavernaEscura = new Ambiente("Caverna Escura", "É uma área ampla, cheia de rochas e bem escura", inimigos.get(4));
+        laboratorio = new Ambiente("Laboratorio", "É um estranho laboratorio com uma gaiola arrombada", new Inimigo("MewTwo", 150, 15, 20, new Item("Diploma")));
+        altarCristal = new Ambiente("Altar de Cristal", "É um ambiente cercado de cristais bem iluminado e amplo, com um altar no centro");
+        abismo = new Ambiente("Fundo do Abismo", "É uma caverna com muitas rochas pontiagudas e extremamente escura",inimigos.get(5));
+        pedestalCrisal = new Ambiente("Pedestal de Cristal", "É um grande salao com um pedestal ao fim cercado de cristais pelo caminho", inimigos.get(6));
 
         // Define as rotas de saida
         //andar central
-        fonteTermal.ajustarSaidas("leste", tunelRochoso);
-        fonteTermal.ajustarSaidas("baixo", salaoSecreto);
+        grutaSubterranea.ajustarSaidas("leste", tunelRochoso);
+        grutaSubterranea.ajustarSaidas("baixo", salaoSecreto);
         
         tunelRochoso.ajustarSaidas("norte", tunelLago);
-        tunelRochoso.ajustarSaidas("oeste", fonteTermal);
+        tunelRochoso.ajustarSaidas("oeste", grutaSubterranea);
 
         tunelLago.ajustarSaidas("norte", tunelSalaCristal);
         tunelLago.ajustarSaidas("sul", tunelRochoso);
@@ -72,7 +72,7 @@ public class Jogo {
         abismo.ajustarSaidas("cima", buracoTopo);
         abismo.ajustarSaidas("norte", pedestalCrisal);
 
-        salaoSecreto.ajustarSaidas("cima", fonteTermal);
+        salaoSecreto.ajustarSaidas("cima", grutaSubterranea);
         salaoSecreto.ajustarSaidas("leste", cavernaEscura);
 
         cavernaEscura.ajustarSaidas("oeste", salaoSecreto);
@@ -86,9 +86,14 @@ public class Jogo {
     private ArrayList<Inimigo> getInimigosDoJogo() {
         ArrayList<Inimigo> inimigos = new ArrayList<>();
         
-        inimigos.add(new Inimigo("Geodude", 100, 3, 10, new ItemCura("Oran berry")));
-        inimigos.add(new Inimigo("Rufflet", 100, 4, 15, new ItemDefesa("Apicot berry")));
-        inimigos.add(new Inimigo("Cramorant", 100, 5, 10, new ItemAtaque("Liechi berry")));
+        inimigos.add(new Inimigo("Zubat", 75, 3, 17, new ItemDefesa()));
+        inimigos.add(new Inimigo("Rufflet", 80, 4, 16, new ItemDefesa()));
+        inimigos.add(new Inimigo("Cramorant", 85, 5, 15, new ItemAtaque()));
+        inimigos.add(new Inimigo("Sneasel", 90, 6, 14, new ItemAtaque()));
+        inimigos.add(new Inimigo("Makuhita", 95, 7, 13, new ItemAtaque()));
+        inimigos.add(new Inimigo("Delibird", 100, 8, 12, new ItemCura()));
+        inimigos.add(new Inimigo("Geodude", 105, 9, 11, new ItemCura()));
+        
         
         Collections.shuffle(inimigos);
 
@@ -162,10 +167,8 @@ public class Jogo {
 
     // Implementacoes dos comandos do usuario
 
-    /**
-    Exibimos uma mensagem contextualizada com o jogo
-    E listamos as possíveis decisões do jogador
-    */
+    //Exibimos uma mensagem contextualizada com o jogo
+    //E listamos as possíveis decisões do jogador
     private void imprimirAjuda(){
         System.out.println("Voce esta perdido e sozinho. Então voce caminha");
         System.out.println("pela enorme caverna estranha.");
@@ -178,10 +181,8 @@ public class Jogo {
         System.out.println("==");
     }
 
-    /**
-    Tenta ir em uma direcao. Se existe uma saida entra no 
-    novo ambiente, caso contrario imprime mensagem de erro.
-    */
+    //Tenta ir em uma direcao. Se existe uma saida entra no 
+    //novo ambiente, caso contrario imprime mensagem de erro.
     private void irParaAmbiente(Comando comando) {
         if(!comando.temSegundaPalavra()) {
             // se nao ha segunda palavra, nao sabemos pra onde ir...
@@ -210,16 +211,8 @@ public class Jogo {
         System.out.println(ambienteAtual.descricaoCompleta());        
 
         if (ambienteAtual.temInimigo()) {
-        //    System.out.println("Voce deseja lutar com ele?");
-        //    System.out.println("1) SIM     2) NAO");
-        //    Comando decisao = analisador.pegarComando();
-        //    if (decisao.getPalavraDeComando().equals("1")) {
                 lutar();
-        //    } else if (decisao.getPalavraDeComando().equals("2")) {
-        //       return; 
-        //    }
-        } else {
-            return;
+                imprimeLocalAtual();
         }
     }
 
@@ -228,16 +221,15 @@ public class Jogo {
             terminado = false;
             System.out.println("Voce esta morto, tente novamente !!!");
         } else {
-            ambienteAtual.adversario().soltarItem().coletar(jogador);
             System.out.println("Voce esta coletou o item que estava com " + ambienteAtual.adversario().getNome());
+            ambienteAtual.adversario().soltarItem().coletar(jogador);
+            ambienteAtual.eliminaPokemon();
         } 
     }
 
-    /**
-    "Sair" foi digitado. Verifica o resto do comando pra ver
-    se nos queremos realmente sair do jogo.
-    @return true, se este comando sai do jogo, false, caso contrario
-    */
+    //"Sair" foi digitado. Verifica o resto do comando pra ver
+    //se nos queremos realmente sair do jogo.
+    //@return true, se este comando sai do jogo, false, caso contrario    
     private boolean sair(Comando comando) {
         if(comando.temSegundaPalavra()) {
             System.out.println("Sair o que?");
@@ -247,4 +239,5 @@ public class Jogo {
             return true;  // sinaliza que nos queremos sair
         }
     }
+
 }
