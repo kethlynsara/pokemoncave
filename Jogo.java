@@ -7,6 +7,7 @@ public class Jogo {
     private boolean terminado;
     private Jogador jogador;
     private Combate combate;
+    private int inimigosDerrotados;
         
     // Cria o jogo, definindo seu mapa e cenários.
     public Jogo() {
@@ -15,6 +16,7 @@ public class Jogo {
         terminado = false;
         jogador = new Jogador(100,5,20);
         combate = new Combate();
+        inimigosDerrotados = 0;
     }
 
     // Cria todos os ambientes e liga as saidas deles
@@ -224,6 +226,11 @@ public class Jogo {
             System.out.println("Voce esta coletou o item que estava com " + ambienteAtual.adversario().getNome());
             ambienteAtual.adversario().soltarItem().coletar(jogador);
             ambienteAtual.eliminaPokemon();
+            inimigosDerrotados++;
+
+            if (inimigosDerrotados == getInimigosDoJogo().size()) {
+                System.out.println("Todos os inimigos foram derrotados! O último ambiente está liberado.");
+            }
         } 
     }
 
