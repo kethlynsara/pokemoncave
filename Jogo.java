@@ -1,7 +1,8 @@
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Jogo {
+public class Jogo extends Component{
     private Analisador analisador;
     private Ambiente ambienteAtual;
     private boolean terminado;
@@ -116,26 +117,28 @@ public class Jogo {
     }
 
     // Imprime a mensagem de abertura para o jogador.
-    private void imprimirBoasVindas(){
-        System.out.println();
-        System.out.println("Bem-vindo ao PokemonCave Game!");
-        System.out.println("PokemonCave Game eh um jogo de explorassao, incrivelmente intrigante.");
-        System.out.println("Digite 'ajuda' caso precise de algumas dicas.");
-        System.out.println();
+    public String imprimirBoasVindas(){
+        String montaBoasVindas;
+        montaBoasVindas = "===== + + + ===== \n";
+        montaBoasVindas += "Bem-vindo ao PokemonCave Game! \n";
+        montaBoasVindas += "PokemonCave Game eh um jogo de explorassao, incrivelmente intrigante. \n";
+        montaBoasVindas += "Digite 'ajuda' caso precise de algumas dicas. \n";
+        montaBoasVindas += "===== + + + =====";
         
-        imprimeLocalAtual();
+        montaBoasVindas += imprimeLocalAtual();
+        return montaBoasVindas;
     }
 
     // Metodo usado para informar a localizacao atual do jogador
-    private void imprimeLocalAtual(){
-        System.out.println("Voce esta no(a) " + ambienteAtual.getNome());
-    
-        System.out.println("Saidas disponiveis:");
+    private String imprimeLocalAtual(){
+        String exibeLocal = "\nVoce esta no(a) " + ambienteAtual.getNome() + "\n";
+        exibeLocal += "Saidas disponiveis:";
         
         for (String s: ambienteAtual.listaSaidas()) {
-            System.out.print(s + "  ");
+            exibeLocal += s + "  ";
         }
-        System.out.println();
+        exibeLocal += "\n";
+        return exibeLocal;
     }
 
     // Dado um comando, processa-o (ou seja, executa-o)
