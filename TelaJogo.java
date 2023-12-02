@@ -1,10 +1,12 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -15,8 +17,11 @@ public class TelaJogo {
     private Jogo jogo;
     private JTextArea areaTexto;
 
+    private PalavrasComando comandos;
+
     public TelaJogo () {
         jogo = new Jogo();
+        comandos = new PalavrasComando();
         montarTela();
     }
 
@@ -41,6 +46,7 @@ public class TelaJogo {
 
         iniciaPainelInferior();
         
+        iniciaPainelCentral();
     }
 
     private void iniciaPainelEsquerdo () {
@@ -51,17 +57,67 @@ public class TelaJogo {
     }
 
     private void iniciaPainelInferior () {
-        JPanel quadroInferior = new JPanel(new FlowLayout());
+       JPanel quadroInferior = new JPanel(new FlowLayout());
+       
+       HashMap<String,JButton> botoesAcao = new HashMap<String,JButton>();
+
+       for(String s : comandos.listaDeComandos() ) {
+            botoesAcao.put(s, new JButton(s));
+       }
+        
+       configurarBotoes(botoesAcao, quadroInferior);
+        
+        // criar botoes para substituir os comandos e realizar as chamadas em jogo
+
+        tela.add(quadroInferior, BorderLayout.SOUTH);
+    }
+
+    private void configurarBotoes (HashMap<String,JButton> botoes, JPanel quadroInferior) {
+        // NAO FUNCIONA
+        botoes.get("sair").addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jogo.sair(new Comando("sair", null));
+            }
+        });
+        // FUNCIONA POREM EXIBE NO TERMINAL
+        botoes.get("observar").addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jogo.observarAmbiente();
+            }
+        });
+        // FUNCIONA POREM EXIBE NO TERMINAL
+        botoes.get("ajuda").addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jogo.imprimirAjuda();
+            }
+        });
+        // NAO IMPLEMENTADO
+        botoes.get("ir").addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //jogo.imprimirAjuda();
+            }
+        });
+
+        quadroInferior.add(botoes.get("sair"));
+        quadroInferior.add(botoes.get("observar"));
+        quadroInferior.add(botoes.get("ajuda"));
+        quadroInferior.add(botoes.get("ir"));
+
+    }
+
+    private void iniciaPainelCentral () {
+        JPanel quadroCentral = new JPanel(new FlowLayout());
         areaTexto = new JTextArea();
         Font fonteTexto = new Font("Candara", Font.BOLD, 16);
         areaTexto.setFont(fonteTexto);
         areaTexto.setText(jogo.imprimirBoasVindas());
         areaTexto.setEditable(false);
-        quadroInferior.add(areaTexto);
-        
-        // criar botoes para substituir os comandos e realizar as chamadas em jogo
-
-        tela.add(quadroInferior, BorderLayout.SOUTH);
+        quadroCentral.add(areaTexto);
+        tela.add(quadroCentral,BorderLayout.CENTER);
     }
 
 

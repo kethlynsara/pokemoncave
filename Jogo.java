@@ -132,7 +132,7 @@ public class Jogo extends Component{
     // Metodo usado para informar a localizacao atual do jogador
     private String imprimeLocalAtual(){
         String exibeLocal = "\nVoce esta no(a) " + ambienteAtual.getNome() + "\n";
-        exibeLocal += "Saidas disponiveis:";
+        exibeLocal += "Saidas disponiveis: \n";
         
         for (String s: ambienteAtual.listaSaidas()) {
             exibeLocal += s + "  ";
@@ -174,7 +174,7 @@ public class Jogo extends Component{
 
     //Exibimos uma mensagem contextualizada com o jogo
     //E listamos as possíveis decisões do jogador
-    private void imprimirAjuda(){
+    public void imprimirAjuda(){
         System.out.println("Voce esta perdido e sozinho. Então voce caminha");
         System.out.println("pela enorme caverna estranha.");
         System.out.println();
@@ -212,7 +212,7 @@ public class Jogo extends Component{
         }
     }
 
-    private void observarAmbiente(){ // Como coletar decisao, muda Palavras de comando???
+    public void observarAmbiente(){ // Como coletar decisao, muda Palavras de comando???
         System.out.println(ambienteAtual.descricaoCompleta());        
 
         if (ambienteAtual.temInimigo()) {
@@ -240,7 +240,7 @@ public class Jogo extends Component{
     //"Sair" foi digitado. Verifica o resto do comando pra ver
     //se nos queremos realmente sair do jogo.
     //@return true, se este comando sai do jogo, false, caso contrario    
-    private boolean sair(Comando comando) {
+    public boolean sair(Comando comando) {
         if(comando.temSegundaPalavra()) {
             System.out.println("Sair o que?");
             return false;
