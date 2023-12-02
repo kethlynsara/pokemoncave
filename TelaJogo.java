@@ -17,6 +17,11 @@ public class TelaJogo {
     private Jogo jogo;
     private JTextArea areaTexto;
 
+    private JPanel quadroCentral;
+    private JPanel quadroEsquerdo;
+    private JPanel quadroInferior;
+    private JPanel quadroDireito;
+
     private PalavrasComando comandos;
 
     public TelaJogo () {
@@ -51,13 +56,13 @@ public class TelaJogo {
 
     private void iniciaPainelEsquerdo () {
         // Define componentes para colocar no painel para colocar na janela - Painel esquerdo
-        JPanel quadroEsquerdo = new JPanel(new FlowLayout());
+        quadroEsquerdo = new JPanel(new FlowLayout());
         quadroEsquerdo.add(new JLabel(new ImageIcon("img/pk.jpeg")));
         tela.add(quadroEsquerdo, BorderLayout.WEST);
     }
 
     private void iniciaPainelInferior () {
-       JPanel quadroInferior = new JPanel(new FlowLayout());
+       quadroInferior = new JPanel(new FlowLayout());
        
        HashMap<String,JButton> botoesAcao = new HashMap<String,JButton>();
 
@@ -72,6 +77,7 @@ public class TelaJogo {
         tela.add(quadroInferior, BorderLayout.SOUTH);
     }
 
+    // ******** IMCOMPLETO *********
     private void configurarBotoes (HashMap<String,JButton> botoes, JPanel quadroInferior) {
         // NAO FUNCIONA
         botoes.get("sair").addActionListener(new ActionListener() {
