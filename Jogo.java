@@ -3,21 +3,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Jogo extends Component{
-    private Analisador analisador;
     private Ambiente ambienteAtual;
-    private boolean terminado;
     private Jogador jogador;
-    private Combate combate;
+    private PalavrasComando comandos;
     private int inimigosDerrotados;
         
     // Cria o jogo, definindo seu mapa e cenários.
-    public Jogo() {
+    public Jogo(Jogador jogador) {
         criarMapa();
-        analisador = new Analisador();
-        terminado = false;
-        jogador = new Jogador(100,5,20);
-        combate = new Combate();
+        this.jogador = jogador;
         inimigosDerrotados = 0;
+        comandos = new PalavrasComando();
     }
 
     // Cria todos os ambientes e liga as saidas deles
@@ -103,33 +99,8 @@ public class Jogo extends Component{
         return inimigos;
     }
 
-    // Onde o jogo é excecutado. Fica em loop ate terminar o jogo.
-    public void jogar() {
-
-        // Entra no loop de comando principal. Aqui nos repetidamente lemos
-        // comandos e os executamos ate o jogo terminar.                
-        while (! terminado) {
-            Comando comando = analisador.pegarComando();
-            terminado = processarComando(comando);
-        }
-        System.out.println("Obrigado por jogar. Ate mais!");
-    }
-
-    // Imprime a mensagem de abertura para o jogador.
-    public String imprimirBoasVindas(){
-        String montaBoasVindas;
-        montaBoasVindas = "===== + + + ===== \n";
-        montaBoasVindas += "Bem-vindo ao PokemonCave Game! \n";
-        montaBoasVindas += "PokemonCave Game eh um jogo de explorassao, incrivelmente intrigante. \n";
-        montaBoasVindas += "Digite 'ajuda' caso precise de algumas dicas. \n";
-        montaBoasVindas += "===== + + + =====";
-        
-        montaBoasVindas += imprimeLocalAtual();
-        return montaBoasVindas;
-    }
-
     // Metodo usado para informar a localizacao atual do jogador
-    private String imprimeLocalAtual(){
+    public String imprimeLocalAtual(){
         String exibeLocal = "\nVoce esta no(a) " + ambienteAtual.getNome() + "\n";
         exibeLocal += "Saidas disponiveis: \n";
         
@@ -140,64 +111,27 @@ public class Jogo extends Component{
         return exibeLocal;
     }
 
-    // Dado um comando, processa-o (ou seja, executa-o)
-    // @param comando O Comando a ser processado.
-    // @return true se o comando finaliza o jogo.     
-    private boolean processarComando(Comando comando){
-        boolean querSair = false;
-
-        if(comando.ehDesconhecido()) {
-            System.out.println("Eu nao entendi o que voce disse...");
-            return false;
-        }
-
-        String palavraDeComando = comando.getPalavraDeComando();
-        
-        if (palavraDeComando.equals("ajuda")) {
-            imprimirAjuda();
-        }
-        else if (palavraDeComando.equals("ir")) {
-            irParaAmbiente(comando);
-        }
-        else if (palavraDeComando.equals("observar")) {
-            observarAmbiente();
-        }
-        else if (palavraDeComando.equals("sair")) {
-            querSair = sair(comando);
-        }
-
-        return querSair;
-    }
-
     // Implementacoes dos comandos do usuario
 
     //Exibimos uma mensagem contextualizada com o jogo
     //E listamos as possíveis decisões do jogador
     public String imprimirAjuda(){
-        String ajuda = "Voce esta perdido e sozinho. Então voce caminha \n";
+        String ajuda = "\nVoce esta perdido e sozinho. Então voce caminha \n";
         ajuda += "pela enorme caverna estranha. \n \n";
         ajuda += "Suas ações disponíveis são: \n";
         ajuda += "===  ";
-        for (String e : analisador.comandos()) {
+        for (String e : comandos.listaDeComandos()) {
             ajuda += e + "  ";
         }
-        ajuda += "===";
+        ajuda += "=== \n";
 
         return ajuda;
     }
 
     //Tenta ir em uma direcao. Se existe uma saida entra no 
-    //novo ambiente, caso contrario imprime mensagem de erro.
-    private void irParaAmbiente(Comando comando) {
-        if(!comando.temSegundaPalavra()) {
-            // se nao ha segunda palavra, nao sabemos pra onde ir...
-            System.out.println("Ir pra onde?");
-            return;
-        }
-
-        String direcao = comando.getSegundaPalavra();
-
-        // Tenta sair do ambiente atual
+    //novo ambiente, caso contrario imprime mensagem de erro.    
+    public boolean irParaAmbiente(String direcao) {
+        
         Ambiente proximoAmbiente = null;
         
         if (ambienteAtual.listaSaidas().contains(direcao)) {
@@ -205,49 +139,58 @@ public class Jogo extends Component{
         }
 
         if (proximoAmbiente == null) {
-            System.out.println("Nao ha passagem!");
+            throw new IndexOutOfBoundsException("Nao ha nada nessa direcao!!!");
         } else {
-            ambienteAtual = proximoAmbiente;            
-           imprimeLocalAtual();
+            ambienteAtual = proximoAmbiente;
+            if (ambienteAtual.getNome() == "Gruta D'Água") {
+                jogador.somarPontosDeVida(200);
+                return true;
+           }
         }
+
+        return false;
     }
 
-    public void observarAmbiente(){ // Como coletar decisao, muda Palavras de comando???
-        System.out.println(ambienteAtual.descricaoCompleta());        
+    public String observarAmbiente(){
+        String descricaoAmbiente = "\n" + ambienteAtual.descricaoCompleta();        
 
         if (ambienteAtual.temInimigo()) {
-                lutar();
-                imprimeLocalAtual();
+                String luta = lutar();
+                descricaoAmbiente += luta + imprimeLocalAtual();
         }
+        return descricaoAmbiente;
     }
 
-    private void lutar() {
+    /* private boolean lutar() {
         if (!combate.luta(jogador, ambienteAtual.adversario())) {
-            terminado = false;
             System.out.println("Voce esta morto, tente novamente !!!");
+            return false;
         } else {
-            System.out.println("Voce esta coletou o item que estava com " + ambienteAtual.adversario().getNome());
+            System.out.println("Voce coletou o item que estava com " + ambienteAtual.adversario().getNome());
             ambienteAtual.adversario().soltarItem().coletar(jogador);
             ambienteAtual.eliminaPokemon();
             inimigosDerrotados++;
 
             if (inimigosDerrotados == getInimigosDoJogo().size()) {
                 System.out.println("Todos os inimigos foram derrotados! O último ambiente está liberado.");
+                return false;
             }
-        } 
-    }
-
-    //"Sair" foi digitado. Verifica o resto do comando pra ver
-    //se nos queremos realmente sair do jogo.
-    //@return true, se este comando sai do jogo, false, caso contrario    
-    public boolean sair(Comando comando) {
-        if(comando.temSegundaPalavra()) {
-            System.out.println("Sair o que?");
-            return false;
         }
-        else {
-            return true;  // sinaliza que nos queremos sair
+        return true;
+    } */
+
+    public String lutar() {
+        boolean vitoria = TelaCombate.lutar(ambienteAtual.adversario(), jogador);
+        String nomeInimigo = ambienteAtual.adversario().getNome();
+        Item itemColetado = null;
+
+        if (vitoria) {
+            itemColetado = ambienteAtual.adversario().soltarItem();
+            ambienteAtual.eliminaPokemon();
+            inimigosDerrotados++;
+            return ResultadoLuta.obterMensagem(nomeInimigo, itemColetado, inimigosDerrotados == getInimigosDoJogo().size(), jogador);
+        } else {
+            return " VOCÊ MORREU !!!";
         }
     }
-
 }
