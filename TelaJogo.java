@@ -78,7 +78,7 @@ public class TelaJogo {
     }
 
     // ******** IMCOMPLETO *********
-    /*private void configurarBotoes (HashMap<String,JButton> botoes, JPanel quadroInferior) {
+    private void configurarBotoes (HashMap<String,JButton> botoes, JPanel quadroInferior) {
         // NAO FUNCIONA
         botoes.get("sair").addActionListener(new ActionListener() {
             @Override
@@ -113,9 +113,7 @@ public class TelaJogo {
         quadroInferior.add(botoes.get("ajuda"));
         quadroInferior.add(botoes.get("ir"));
 
-    } */
-
-    // MUDOU ANALISADOR PARA EXIBIR JANELA, TRATAR COMANDOS APARTIR DELE
+    } 
 
     private void iniciaPainelCentral () {
         JPanel quadroCentral = new JPanel(new FlowLayout());

@@ -28,9 +28,8 @@ public class Analisador
         String palavra2 = null;
 
         System.out.print("> ");     // imprime o prompt
-        String autor = JOptionPane.showInputDialog("Digite seu comando");
 
-        linha = JOptionPane.showInputDialog("Texto da mensagem");
+        linha = entrada.nextLine();
 
         // Tenta encontrar ate duas palavras na linha
         Scanner tokenizer = new Scanner(linha);
