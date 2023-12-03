@@ -115,6 +115,7 @@ public class TelaJogo {
                     Font fonteTexto = new Font("Arial", Font.BOLD, 50);
                     areaTexto.setFont(fonteTexto);
                     historicoTexto = " VOCE MORREU !!!!";
+                    JOptionPane.showMessageDialog(tela, "VOCE MORREU", "FIM", JOptionPane.ERROR_MESSAGE);
                     tela.dispose();
                 }
                 areaTexto.setText(historicoTexto);
@@ -155,19 +156,11 @@ public class TelaJogo {
         quadroInferior.add(botoes.get("sair"));
         
 
-<<<<<<< HEAD
     }
 
     private void iniciaPainelDireito () {
         quadroDireito = new JPanel();
         quadroDireito.setLayout(new BoxLayout(quadroDireito, BoxLayout.Y_AXIS));
-=======
-    } 
-
-    private void iniciaPainelCentral () {
-        JPanel quadroCentral = new JPanel(new FlowLayout());
-        areaTexto = new JTextArea();
->>>>>>> 0cda9ad105cc78324280f97f7aae2ea4911eaee9
         Font fonteTexto = new Font("Candara", Font.BOLD, 16);
         areaTexto.setFont(fonteTexto);
         areaTexto.setText(historicoTexto);
