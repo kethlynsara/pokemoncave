@@ -52,7 +52,7 @@ public class Ambiente {
     //Retorna a descricao e informa caso tenha um inimigo
     public String descricaoCompleta() {
         if (temInimigo()) {
-            return descricao + "\n Oh nao, voce encontrou um " + pokemonSelvagem.getNome() + " Selvagem";
+            return descricao + "\n Oh nao, voce encontrou um " + pokemonSelvagem.getNome() + " Selvagem \n";
         } else {
             return descricao;
         }
