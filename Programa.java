@@ -4,7 +4,7 @@ public class Programa {
 		//Jogo jogo = new Jogo();
 		//jogo.jogar();
 
-		TelaJogo janela = new TelaJogo();
+		TelaJogo janela = new TelaJogo(new Jogador(100,5,20));
 
 		//janela.
 	}
