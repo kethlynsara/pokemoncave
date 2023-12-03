@@ -104,8 +104,7 @@ public class Jogo extends Component{
     }
 
     // Onde o jogo é excecutado. Fica em loop ate terminar o jogo.
-    public void jogar() {            
-        imprimirBoasVindas();
+    public void jogar() {
 
         // Entra no loop de comando principal. Aqui nos repetidamente lemos
         // comandos e os executamos ate o jogo terminar.                
@@ -174,16 +173,17 @@ public class Jogo extends Component{
 
     //Exibimos uma mensagem contextualizada com o jogo
     //E listamos as possíveis decisões do jogador
-    public void imprimirAjuda(){
-        System.out.println("Voce esta perdido e sozinho. Então voce caminha");
-        System.out.println("pela enorme caverna estranha.");
-        System.out.println();
-        System.out.println("Suas ações disponíveis são:");
-        System.out.print("==  ");
+    public String imprimirAjuda(){
+        String ajuda = "Voce esta perdido e sozinho. Então voce caminha \n";
+        ajuda += "pela enorme caverna estranha. \n \n";
+        ajuda += "Suas ações disponíveis são: \n";
+        ajuda += "===  ";
         for (String e : analisador.comandos()) {
-            System.out.print(e + "  ");
+            ajuda += e + "  ";
         }
-        System.out.println("==");
+        ajuda += "===";
+
+        return ajuda;
     }
 
     //Tenta ir em uma direcao. Se existe uma saida entra no 

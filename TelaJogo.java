@@ -41,7 +41,7 @@ public class TelaJogo {
 
         tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         tela.setVisible(true);
-        
+        jogo.jogar();
 
     }
 
@@ -70,7 +70,7 @@ public class TelaJogo {
             botoesAcao.put(s, new JButton(s));
        }
         
-       configurarBotoes(botoesAcao, quadroInferior);
+       //configurarBotoes(botoesAcao, quadroInferior);
         
         // criar botoes para substituir os comandos e realizar as chamadas em jogo
 
@@ -78,7 +78,7 @@ public class TelaJogo {
     }
 
     // ******** IMCOMPLETO *********
-    private void configurarBotoes (HashMap<String,JButton> botoes, JPanel quadroInferior) {
+    /*private void configurarBotoes (HashMap<String,JButton> botoes, JPanel quadroInferior) {
         // NAO FUNCIONA
         botoes.get("sair").addActionListener(new ActionListener() {
             @Override
@@ -97,7 +97,7 @@ public class TelaJogo {
         botoes.get("ajuda").addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jogo.imprimirAjuda();
+                areaTexto.setText(jogo.imprimirAjuda());
             }
         });
         // NAO IMPLEMENTADO
@@ -113,7 +113,9 @@ public class TelaJogo {
         quadroInferior.add(botoes.get("ajuda"));
         quadroInferior.add(botoes.get("ir"));
 
-    }
+    } */
+
+    // MUDOU ANALISADOR PARA EXIBIR JANELA, TRATAR COMANDOS APARTIR DELE
 
     private void iniciaPainelCentral () {
         JPanel quadroCentral = new JPanel(new FlowLayout());

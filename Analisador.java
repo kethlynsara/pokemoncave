@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import java.util.List;
 
 public class Analisador 
@@ -27,8 +28,9 @@ public class Analisador
         String palavra2 = null;
 
         System.out.print("> ");     // imprime o prompt
+        String autor = JOptionPane.showInputDialog("Digite seu comando");
 
-        linha = entrada.nextLine();
+        linha = JOptionPane.showInputDialog("Texto da mensagem");
 
         // Tenta encontrar ate duas palavras na linha
         Scanner tokenizer = new Scanner(linha);
