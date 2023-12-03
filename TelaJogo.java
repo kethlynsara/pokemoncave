@@ -155,11 +155,19 @@ public class TelaJogo {
         quadroInferior.add(botoes.get("sair"));
         
 
+<<<<<<< HEAD
     }
 
     private void iniciaPainelDireito () {
         quadroDireito = new JPanel();
         quadroDireito.setLayout(new BoxLayout(quadroDireito, BoxLayout.Y_AXIS));
+=======
+    } 
+
+    private void iniciaPainelCentral () {
+        JPanel quadroCentral = new JPanel(new FlowLayout());
+        areaTexto = new JTextArea();
+>>>>>>> 0cda9ad105cc78324280f97f7aae2ea4911eaee9
         Font fonteTexto = new Font("Candara", Font.BOLD, 16);
         areaTexto.setFont(fonteTexto);
         areaTexto.setText(historicoTexto);
