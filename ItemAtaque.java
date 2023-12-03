@@ -4,11 +4,14 @@ public class ItemAtaque extends Item {
         super("Liechi berry");
     }
 
-    public void coletar(Jogador jogador) {
-        jogador.setAtaque(3);
+    public String coletar(Jogador jogador) {
+        String msgColeta;
+        jogador.somarAtaque(3);
         super.coletar(jogador);
-        System.out.println(" Voce ganhou 3 pontos de ataque !!!");
-        System.out.println("Voce tem " + jogador.getAtaque() + " Pontos de ataque atualmente");
-        System.out.println("===== +++ =====");
+        msgColeta = "\n Voce ganhou 3 pontos de ataque !!! \n";
+        msgColeta += "Voce tem " + jogador.getAtaque() + " Pontos de ataque atualmente \n";
+        msgColeta +="===== +++ =====\n";
+
+        return msgColeta;
     }
 }

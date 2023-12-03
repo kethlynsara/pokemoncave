@@ -4,11 +4,14 @@ public class ItemDefesa extends Item {
         super("Apricot berry");
     }
 
-    public void coletar(Jogador jogador) {
-        jogador.setArmadura(3);
+    public String coletar(Jogador jogador) {
+        String msgColeta;
+        jogador.somarArmadura(3);
         super.coletar(jogador);
-        System.out.println(" Voce ganhou 3 pontos de defesa !!!");
-        System.out.println("Voce tem " + jogador.getArmadura() + " Pontos de armadura atualmente");
-        System.out.println("===== +++ =====");
+        msgColeta = "\n Voce ganhou 3 pontos de defesa !!! \n";
+        msgColeta +="Voce tem " + jogador.getArmadura() + " Pontos de armadura atualmente \n";
+        msgColeta += "===== +++ =====  \n";
+
+        return msgColeta;
     }
 }

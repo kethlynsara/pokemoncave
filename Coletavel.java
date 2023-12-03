@@ -1,3 +1,3 @@
 public interface Coletavel {
-    public void coletar(Jogador jogador);
+    public String coletar(Jogador jogador);
 }

@@ -9,7 +9,7 @@ public class Item implements Coletavel {
         return nome;
     }
 
-    public void coletar (Jogador jogador) {
-        System.out.println("===== É uma " + nome + " =====");
+    public String coletar (Jogador jogador) {
+        return "===== É uma " + nome + " =====";
     }
 }

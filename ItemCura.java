@@ -4,11 +4,14 @@ public class ItemCura extends Item {
         super("Oran berry");
     }
 
-    public void coletar(Jogador jogador) {
-        jogador.setPontosDeVida(10);
+    public String coletar(Jogador jogador) {
+        String msgColeta;
+        jogador.somarPontosDeVida(10);
         super.coletar(jogador);
-        System.out.println(" Voce ganhou 10 pontos de vida !!!");
-        System.out.println("Voce tem " + jogador.getPontosDeVida() + " Pontos de vida atualmente");
-        System.out.println("===== +++ =====");
+        msgColeta = "\nVoce ganhou 10 pontos de vida !!! \n";
+        msgColeta += "Voce tem " + jogador.getPontosDeVida() + " Pontos de vida atualmente \n";
+        msgColeta +="===== +++ ===== \n";
+        
+        return msgColeta;
     }
 }
