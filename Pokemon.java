@@ -22,14 +22,18 @@ public class Pokemon {
     }
 
     public void setPontosDeVida(int pontosDeVida) {
+        this.pontosDeVida = pontosDeVida;
+    }
+
+    public void somarPontosDeVida(int pontosDeVida) {
         this.pontosDeVida += pontosDeVida;
     }
 
-    public void setArmadura(int armadura) {
+    public void somarArmadura(int armadura) {
         this.armadura += armadura;
     }
 
-    public void setAtaque(int ataque) {
+    public void somarAtaque(int ataque) {
         this.ataque += ataque;
     }
 
