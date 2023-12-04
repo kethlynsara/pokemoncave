@@ -1,22 +1,32 @@
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+
+import javax.swing.ImageIcon;
+
 
 public class Jogo extends Component{
     private Ambiente ambienteAtual;
     private Jogador jogador;
     private PalavrasComando comandos;
     private int inimigosDerrotados;
+    private HashMap<String,ImageIcon> imagens;
         
     // Cria o jogo, definindo seu mapa e cenários.
     public Jogo(Jogador jogador) {
-        criarMapa();
         this.jogador = jogador;
         inimigosDerrotados = 0;
         comandos = new PalavrasComando();
+        imagens = new HashMap<String,ImageIcon>();
+        criarMapa();
     }
 
-    // Cria todos os ambientes e liga as saidas deles
+    public ImageIcon getImagem () {
+        return imagens.get(ambienteAtual.getNome());
+    }
+
+    /* Cria todos os ambientes e liga as saidas deles*/
     private void criarMapa() {
 
         Ambiente grutaSubterranea, tunelRochoso, tunelLago, buracoTopo, salaVazia, tunelSalaCristal, areaIgnea,
@@ -27,7 +37,9 @@ public class Jogo extends Component{
         // Cria os ambiente, inserindo a descrição e o nome dos ambientes
 
         grutaSubterranea = new Ambiente("Gruta D'Água", "É Longo corrego com uma agua cristalina, cercada por rochas e algumas estalactites", inimigos.get(0));
+        guardaImagem(grutaSubterranea.getNome(), new ImageIcon("/img/TunelRochoso.jpg"));
         tunelRochoso = new Ambiente("Túnel Rochoso", "É um túnel amplo com pouca iluminacao e uma pequena trilha no centro");
+        guardaImagem(tunelRochoso.getNome(), new ImageIcon("img/Túnel Rochoso.jpg"));
         tunelLago = new Ambiente("Lago Subterrâneo", "É um grande lago com água fresca e limpa, cercado de minerios nas paredes rochosas", inimigos.get(1));
         buracoTopo = new Ambiente("Buraco", "É um enorme e profundo abismo, cercado de estactites e estalagmites", inimigos.get(2));
         salaVazia = new Ambiente("Sala Vazia", "É uma sala com pouca mobilia, bem iluminada e espacosa", inimigos.get(3));
@@ -80,6 +92,11 @@ public class Jogo extends Component{
 
         ambienteAtual = tunelRochoso;  // O ambiente onde o jogo comeca é na area rochosa
     }
+    
+
+    private void guardaImagem(String nome, ImageIcon imagem){
+        imagens.put(nome, imagem);
+    }
 
     // Devolve a lista de inimigos de forma aleatória
     private ArrayList<Inimigo> getInimigosDoJogo() {
@@ -128,8 +145,8 @@ public class Jogo extends Component{
         return ajuda;
     }
 
-    //Tenta ir em uma direcao. Se existe uma saida entra no 
-    //novo ambiente, caso contrario imprime mensagem de erro.    
+    /*Tenta ir em uma direcao. Se existe uma saida entra no 
+    novo ambiente, caso contrario imprime mensagem de erro.*/    
     public boolean irParaAmbiente(String direcao) {
         
         Ambiente proximoAmbiente = null;
@@ -160,24 +177,6 @@ public class Jogo extends Component{
         }
         return descricaoAmbiente;
     }
-
-    /* private boolean lutar() {
-        if (!combate.luta(jogador, ambienteAtual.adversario())) {
-            System.out.println("Voce esta morto, tente novamente !!!");
-            return false;
-        } else {
-            System.out.println("Voce coletou o item que estava com " + ambienteAtual.adversario().getNome());
-            ambienteAtual.adversario().soltarItem().coletar(jogador);
-            ambienteAtual.eliminaPokemon();
-            inimigosDerrotados++;
-
-            if (inimigosDerrotados == getInimigosDoJogo().size()) {
-                System.out.println("Todos os inimigos foram derrotados! O último ambiente está liberado.");
-                return false;
-            }
-        }
-        return true;
-    } */
 
     public String lutar() {
         boolean vitoria = TelaCombate.lutar(ambienteAtual.adversario(), jogador);

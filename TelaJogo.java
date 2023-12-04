@@ -64,19 +64,19 @@ public class TelaJogo {
 
     private void iniciarComponentes () {
 
-        //iniciaPainelEsquerdo();
+        iniciaPainelEsquerdo(new ImageIcon("img/pk.jpeg"));
 
         iniciaPainelInferior();
         
         iniciaPainelDireito();
     }
 
-    private void iniciaPainelEsquerdo () {
+    private void iniciaPainelEsquerdo (ImageIcon imagem) {
         // Define componentes para colocar no painel para colocar na janela - Painel esquerdo
         quadroEsquerdo = new JPanel();
         quadroEsquerdo.setLayout((new FlowLayout()));
 
-        quadroEsquerdo.add(new JLabel(new ImageIcon("img/pk.jpeg")));
+        quadroEsquerdo.add(new JLabel(imagem));
         tela.add(quadroEsquerdo, BorderLayout.WEST);
     }
 
@@ -138,6 +138,9 @@ public class TelaJogo {
                         if (jogo.irParaAmbiente(JOptionPane.showInputDialog("Para qual direcao deseja ir?"))) {
                             JOptionPane.showMessageDialog(tela, "Seus pontos de vida foram restaurados!!!", "PARABENS !!!",JOptionPane.INFORMATION_MESSAGE);
                         }
+                            quadroEsquerdo.removeAll();
+                            quadroEsquerdo.add(new JLabel(jogo.getImagem()));
+                            tela.add(quadroEsquerdo);
                             historicoTexto += jogo.imprimeLocalAtual();
                             areaTexto.setText(historicoTexto);
                     } catch (Exception error) {
