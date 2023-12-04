@@ -16,11 +16,21 @@ public class PalavrasComando {
         comandosValidos.add("observar");
     }
 
+    /*
+     * O método listaDeComandos retorna uma lista imutável (usando
+     * Collections.unmodifiableList) contendo os comandos válidos. Isso é feito para
+     * garantir que a lista original não possa ser modificada fora da classe.
+     */
     public List<String> listaDeComandos() {
         return Collections.unmodifiableList(comandosValidos);
     }
 
-    public boolean ehComando(String umaString){
+    /*
+     * O método ehComando recebe uma string como parâmetro e verifica se essa string
+     * está presente na lista de comandos válidos. Retorna true se a string for um
+     * comando válido e false caso contrário.
+     */
+    public boolean ehComando(String umaString) {
         // Verifica se contem o comando.
         return comandosValidos.contains(umaString);
     }
