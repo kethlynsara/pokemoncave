@@ -1,4 +1,4 @@
-public class ItemAtaque extends Item {
+public class ItemAtaque extends Item { //Kethlyn
 
     public ItemAtaque() {
         super("Liechi berry");

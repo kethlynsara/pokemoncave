@@ -1,4 +1,4 @@
-public class Inimigo extends Pokemon {
+public class Inimigo extends Pokemon { // Luis Gustavo
     private String nome;
     private Item item;
 

@@ -1,12 +1,7 @@
-import java.util.Scanner;
-import java.util.Random;
-public class Combate {
-    private Scanner entrada;
-    private Random random;
 
-    public Combate (){
-        entrada = new Scanner(System.in);
-    }
+import java.util.Random;
+public class Combate { // Luis Gustavo && Kethlyn Sara
+    private Random random;
 
     /**
      * Exibe texto para informar açao

@@ -1,4 +1,4 @@
-public class Jogador extends Pokemon {
+public class Jogador extends Pokemon { // Luis Gustavo
     private int vidaMaxima;
     public Jogador(int pontosDeVida, int armadura, int ataque) {
         super(pontosDeVida, armadura, ataque);

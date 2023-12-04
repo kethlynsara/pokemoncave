@@ -1,4 +1,4 @@
-public class ResultadoLuta {
+public class ResultadoLuta { //Kethlyn
     public static String obterMensagem(String nomeInimigo, Item itemColetado, boolean todosInimigosDerrotados, Jogador jogador) {
         String mensagem = " ";
 

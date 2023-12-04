@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PalavrasComando {
+public class PalavrasComando { // Luis Gustavo && Kethlyn
     private static ArrayList<String> comandosValidos;
 
     /**

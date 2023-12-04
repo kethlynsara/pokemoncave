@@ -1,5 +1,5 @@
-public class ItemDefesa extends Item {
-
+public class ItemDefesa extends Item { //Kethlyn
+ 
     public ItemDefesa() {
         super("Apricot berry");
     }

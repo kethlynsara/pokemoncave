@@ -1,4 +1,4 @@
-public class ItemCura extends Item {
+public class ItemCura extends Item { //Luis Gustavo
 
     public ItemCura() {
         super("Oran berry");

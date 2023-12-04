@@ -1,4 +1,4 @@
-public class Pokemon {
+public class Pokemon { //Kethlyn
     private int pontosDeVida;
     private int armadura;
     private int ataque;

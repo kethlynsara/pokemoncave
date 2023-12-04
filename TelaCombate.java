@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,13 +14,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.util.HashMap;
 
-public class TelaCombate {
+public class TelaCombate { // Luis Gustavo && Kethlyn
     private JFrame tela;
     private Combate combate;
     private JTextArea descricaoLuta;
     private String listaAcoes;
     private JPanel campoCombate; // centro
     private JPanel campoAcao; // Inferior
+    private JPanel imagem;
     private JScrollPane scroll;
     private Inimigo inimigo;
     private Jogador jogador;
@@ -42,7 +44,7 @@ public class TelaCombate {
     }
 
     private void montarJanela() {
-        tela = new JFrame("Combate");    
+        tela = new JFrame("Combate");
         tela.setSize(300, 400);
         tela.setLayout(new BorderLayout());
 
@@ -55,11 +57,12 @@ public class TelaCombate {
     private void prepararInterface() {
         montarCampoAcao();
         montarCampoCombate();
+        montarCampoImagem();
     }
 
     private void montarCampoAcao() {
         campoAcao = new JPanel();
-        campoAcao.setLayout(new BoxLayout(campoAcao, BoxLayout.X_AXIS));
+        campoAcao.setLayout(new FlowLayout());
 
         JButton botaoAtaque = new JButton("Atacar");
         JButton botaoDefesa = new JButton("Defender");
@@ -110,6 +113,15 @@ public class TelaCombate {
 
         campoCombate.add(scroll);
         
-        tela.add(campoCombate,BorderLayout.CENTER);
+        tela.add(campoCombate,BorderLayout.WEST);
+    }
+
+    private void montarCampoImagem(){
+        imagem = new JPanel();
+        imagem.setLayout(new BoxLayout(imagem, 0));
+
+        imagem.add(new JLabel(new ImageIcon("img/batalha.jpg")));
+
+        tela.add(imagem,BorderLayout.EAST);
     }
 }

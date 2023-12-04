@@ -1,4 +1,4 @@
-public class Item implements Coletavel {
+public class Item implements Coletavel { // Luis Gustavo
     public String nome;
 
     public Item (String nome) {

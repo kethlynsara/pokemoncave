@@ -1,29 +1,20 @@
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-
-import javax.swing.ImageIcon;
 
 
-public class Jogo extends Component{
+public class Jogo extends Component{ // Luis Gustavo && Kethlyn
     private Ambiente ambienteAtual;
     private Jogador jogador;
     private PalavrasComando comandos;
     private int inimigosDerrotados;
-    private HashMap<String,ImageIcon> imagens;
         
     // Cria o jogo, definindo seu mapa e cenários.
     public Jogo(Jogador jogador) {
         this.jogador = jogador;
         inimigosDerrotados = 0;
         comandos = new PalavrasComando();
-        imagens = new HashMap<String,ImageIcon>();
         criarMapa();
-    }
-
-    public ImageIcon getImagem () {
-        return imagens.get(ambienteAtual.getNome());
     }
 
     /* Cria todos os ambientes e liga as saidas deles*/
@@ -37,9 +28,7 @@ public class Jogo extends Component{
         // Cria os ambiente, inserindo a descrição e o nome dos ambientes
 
         grutaSubterranea = new Ambiente("Gruta D'Água", "É Longo corrego com uma agua cristalina, cercada por rochas e algumas estalactites", inimigos.get(0));
-        guardaImagem(grutaSubterranea.getNome(), new ImageIcon("/img/TunelRochoso.jpg"));
         tunelRochoso = new Ambiente("Túnel Rochoso", "É um túnel amplo com pouca iluminacao e uma pequena trilha no centro");
-        guardaImagem(tunelRochoso.getNome(), new ImageIcon("img/Túnel Rochoso.jpg"));
         tunelLago = new Ambiente("Lago Subterrâneo", "É um grande lago com água fresca e limpa, cercado de minerios nas paredes rochosas", inimigos.get(1));
         buracoTopo = new Ambiente("Buraco", "É um enorme e profundo abismo, cercado de estactites e estalagmites", inimigos.get(2));
         salaVazia = new Ambiente("Sala Vazia", "É uma sala com pouca mobilia, bem iluminada e espacosa", inimigos.get(3));
@@ -47,7 +36,7 @@ public class Jogo extends Component{
         areaIgnea = new Ambiente("Região quente", "É uma caverna com magma correndo ao fundo, bem escura");
         salaoSecreto = new Ambiente("Salao Secreto", "É uma Sala escondida entre as rochas com algumas estantes e livros");
         cavernaEscura = new Ambiente("Caverna Escura", "É uma área ampla, cheia de rochas e bem escura", inimigos.get(4));
-        laboratorio = new Ambiente("Laboratorio", "É um estranho laboratorio com uma gaiola arrombada", new Inimigo("MewTwo", 150, 15, 20, new Item("Diploma")));
+        laboratorio = new Ambiente("Laboratorio", "É um estranho laboratorio com uma gaiola arrombada", new Inimigo("MewTwo", 100, 13, 17, new Item("Diploma")));
         altarCristal = new Ambiente("Altar de Cristal", "É um ambiente cercado de cristais bem iluminado e amplo, com um altar no centro");
         abismo = new Ambiente("Fundo do Abismo", "É uma caverna com muitas rochas pontiagudas e extremamente escura",inimigos.get(5));
         pedestalCrisal = new Ambiente("Pedestal de Cristal", "É um grande salao com um pedestal ao fim cercado de cristais pelo caminho", inimigos.get(6));
@@ -91,11 +80,6 @@ public class Jogo extends Component{
         pedestalCrisal.ajustarSaidas("sul", abismo);
 
         ambienteAtual = tunelRochoso;  // O ambiente onde o jogo comeca é na area rochosa
-    }
-    
-
-    private void guardaImagem(String nome, ImageIcon imagem){
-        imagens.put(nome, imagem);
     }
 
     // Devolve a lista de inimigos de forma aleatória
@@ -176,6 +160,10 @@ public class Jogo extends Component{
                 descricaoAmbiente += luta + imprimeLocalAtual();
         }
         return descricaoAmbiente;
+    }
+
+    public boolean venceu(){
+        return inimigosDerrotados == getInimigosDoJogo().size();
     }
 
     public String lutar() {

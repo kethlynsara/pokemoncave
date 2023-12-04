@@ -14,12 +14,11 @@ import javax.swing.JTextArea;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class TelaJogo {
+public class TelaJogo { // Luis Gustavo && Kethlyn
     private JFrame tela;
     private Jogo jogo;
     private JTextArea areaTexto;
     private String historicoTexto;
-    private JPanel quadroCentral;
     private JPanel quadroEsquerdo;
     private JPanel quadroInferior;
     private JPanel quadroDireito;
@@ -64,7 +63,7 @@ public class TelaJogo {
 
     private void iniciarComponentes () {
 
-        iniciaPainelEsquerdo(new ImageIcon("img/pk.jpeg"));
+        iniciaPainelEsquerdo(new ImageIcon("img/Map.jpeg"));
 
         iniciaPainelInferior();
         
@@ -113,9 +112,15 @@ public class TelaJogo {
                 historicoTexto += jogo.observarAmbiente();
                 if (!jogador.estaVivo()) {
                     Font fonteTexto = new Font("Arial", Font.BOLD, 50);
-                    areaTexto.setFont(fonteTexto);
                     historicoTexto = " VOCE MORREU !!!!";
-                    JOptionPane.showMessageDialog(tela, "VOCE MORREU", "FIM", JOptionPane.ERROR_MESSAGE);
+                    areaTexto.setFont(fonteTexto);
+                    JOptionPane.showMessageDialog(tela, "VOCE MORREU", "FIM", JOptionPane.ERROR_MESSAGE);        
+                    GerarDiploma.gerarDiplomaDerrota(JOptionPane.showInputDialog("Qual seu nome?"), tela);
+                    tela.dispose();
+                } else if (jogo.venceu()) {
+                    JOptionPane.showMessageDialog(tela, "VOCE VENCEU !!!", "PARABENS", JOptionPane.INFORMATION_MESSAGE);
+                    GerarDiploma.gerarDiplomaVitoria(JOptionPane.showInputDialog("Qual seu nome?"), tela);
+                    //cria diploma
                     tela.dispose();
                 }
                 areaTexto.setText(historicoTexto);
@@ -138,9 +143,6 @@ public class TelaJogo {
                         if (jogo.irParaAmbiente(JOptionPane.showInputDialog("Para qual direcao deseja ir?"))) {
                             JOptionPane.showMessageDialog(tela, "Seus pontos de vida foram restaurados!!!", "PARABENS !!!",JOptionPane.INFORMATION_MESSAGE);
                         }
-                            quadroEsquerdo.removeAll();
-                            quadroEsquerdo.add(new JLabel(jogo.getImagem()));
-                            tela.add(quadroEsquerdo);
                             historicoTexto += jogo.imprimeLocalAtual();
                             areaTexto.setText(historicoTexto);
                     } catch (Exception error) {
@@ -148,6 +150,7 @@ public class TelaJogo {
                     }
                 } else {
                     JOptionPane.showMessageDialog(tela, "VOCE MORREU", "FIM", JOptionPane.ERROR_MESSAGE);
+                    GerarDiploma.gerarDiplomaDerrota(JOptionPane.showInputDialog("Qual o seu Nome?"), tela);
                     tela.dispose();
                 }
             }
